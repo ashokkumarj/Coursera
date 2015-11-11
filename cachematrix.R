@@ -1,3 +1,5 @@
+# Function to create a matirx object with functions get,set and getmatrix and 
+# setmatrix. The function takes a matrix as input and returns a list of functions
 
 makeCacheMatrix <- function(x = matrix()) {
   m<-NULL
@@ -13,7 +15,11 @@ list(set=set, get=get,
    getmatrix=getmatrix)
 }
 
-cacheSolve <- function(x=matrix(), ...) {
+# Function to create an inverse of a given matirx. If the matrix inverse already 
+# exists the function will use the cached value if not will calculate the inverser
+# of the matrix and update the cache 
+
+cacheSolve <- function(x, ...) {
     m<-x$getmatrix()
     if(!is.null(m)){
       message("getting cached data")
