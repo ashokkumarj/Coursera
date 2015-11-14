@@ -16,7 +16,7 @@ list(set=set, get=get,
 }
 
 # Function to create an inverse of a given matirx. If the matrix inverse already 
-# exists the function will use the cached value if not will calculate the inverser
+# exists the function will use the cached value if not it will calculate the inverse
 # of the matrix and update the cache 
 
 cacheSolve <- function(x, ...) {
@@ -25,8 +25,38 @@ cacheSolve <- function(x, ...) {
       message("getting cached data")
       return(m)
     }
-    datos<-x$get()
-    m<-solve(datos, ...)
+    data<-x$get()
+    m<-solve(data, ...)
     x$setmatrix(m)
     m
 }
+
+# Test Code 
+matrix1 <- matrix(1:4, c(2,2))
+matrix1
+
+matrix2 <- matrix(12:15, c(2,2))
+matrix2
+
+# construct with default arguments
+mkcm <- makeCacheMatrix()
+
+cacheSolve(mkcm)
+
+# use matrix1 
+mkcm$set(matrix1)
+mkcm$get()
+
+# compute inverse
+cacheSolve(mkcm)
+# get cached inverse
+cacheSolve(mkcm)
+
+# construct with matrix2
+mkcm <- makeCacheMatrix(matrix2)
+mkcm$get()
+
+# compute inverse
+cacheSolve(mkcm)
+# get cached inverse
+cacheSolve(mkcm)
